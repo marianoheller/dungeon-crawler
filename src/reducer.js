@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import { gameHasStarted } from './engine/CrawlerReducers';
+import { gameState, playerState } from './crawler/CrawlerReducers';
 
 export default combineReducers({
-    game: gameHasStarted,
+    game: gameState,
+    player: playerState,
 });

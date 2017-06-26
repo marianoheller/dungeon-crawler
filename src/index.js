@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from './store';
 import registerServiceWorker from './registerServiceWorker';
 
-import { initialState } from './engine/Crawler.config';
+import { initialState } from './App.config'
 import App from './App';
 
 const store = configureStore(initialState);
