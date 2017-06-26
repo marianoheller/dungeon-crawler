@@ -6,7 +6,9 @@ export function gameState(state = null, action) {
             return {
                 ...state,
                 dungeon: Engine.generateDungeon(),
+                contDungeon: 0,
                 gameHasStarted: true,
+                position: Engine.generatePlayerPosition(),
             };
         case 'GAME_HAS_FINISHED':
             return {

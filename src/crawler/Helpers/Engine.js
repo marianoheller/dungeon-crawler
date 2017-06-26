@@ -14,13 +14,29 @@ export default class Engine {
         return rawDungeon;
     }
 
+    static generatePlayerPosition( dungeon ) {
+        if ( !dungeon ) {   throw new Error(`Param erroneo al generar position. dungeon: ${dungeon}`)   }
+
+        const height = dungeon.length;
+        const width = dungeon[0].length;
+
+        const regexValidSpots = /[2-9]/g;
+        const plainDungeon = dungeon.reduce( (acc, e) => acc.concat(e) );
+        if( plainDungeon.some( (e) => e.) )
+        
+
+        return { x: 1, y: 1 }
+    }
+
     static generatePlayerStats() {
-        // if ( !dungeon ) {   throw new Error(`No dungeon param. Unable to generate player. dungeon: ${dungeon}`)   }
         const stats = {};
 
         //Generate stats
         Object.keys(initialState.player.stats).forEach( (key) => {
             switch (key) {
+                case "name":
+                    stats[key] = "aaaaa";
+                    break;
                 case "health":
                     stats[key] = baseHealthMin + Math.ceil(Math.random()*10)*10;
                     break;
@@ -45,6 +61,5 @@ export default class Engine {
         });
 
         return stats;
-
     }
 }
