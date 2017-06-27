@@ -1,14 +1,16 @@
 import Engine from './Helpers/Engine'
+import { dungeonConfig } from '../App.config';
 
 export function gameState(state = null, action) {
     switch (action.type) {
         case 'GAME_HAS_STARTED':
+            const newDungeon = Engine.generateDungeon( dungeonConfig );
             return {
                 ...state,
-                dungeon: Engine.generateDungeon(),
+                dungeon: newDungeon,
                 contDungeon: 0,
                 gameHasStarted: true,
-                position: Engine.generatePlayerPosition(),
+                position: Engine.generatePlayerPosition( newDungeon ),
             };
         case 'GAME_HAS_FINISHED':
             return {

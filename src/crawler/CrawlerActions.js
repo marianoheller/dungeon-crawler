@@ -12,3 +12,10 @@ export function finishGame() {
         gameHasStarted: false,
     };
 }
+
+export function keyPress(key) {
+    return {
+        type: 'GAME_HAS_FINISHED',
+        key: key,
+    };
+}

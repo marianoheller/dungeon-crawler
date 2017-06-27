@@ -7,6 +7,7 @@
     "random-dungeon-generator": "^1.0.30",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-keydown": "^1.7.4",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",

@@ -1,4 +1,5 @@
 import NewDungeon from './DungeonGenerator';
+import GenerateElements from './ElementsGenerator';
 import { initialState, baseExpPerLvl, baseHealthMin } from '../../App.config';
 
 export default class Engine {
@@ -10,20 +11,12 @@ export default class Engine {
             minRoomSize,
             maxRoomSize,
         };
-        const rawDungeon = NewDungeon(options);
+        const rawDungeon = GenerateElements( NewDungeon(options) );
         return rawDungeon;
     }
 
     static generatePlayerPosition( dungeon ) {
-        if ( !dungeon ) {   throw new Error(`Param erroneo al generar position. dungeon: ${dungeon}`)   }
-
-        const height = dungeon.length;
-        const width = dungeon[0].length;
-
-        const regexValidSpots = /[2-9]/g;
-        const plainDungeon = dungeon.reduce( (acc, e) => acc.concat(e) );
-        if( plainDungeon.some( (e) => e.) )
-        
+        if ( !dungeon ) {   throw new Error(`Param erroneo al generar position. dungeon: ${dungeon}`)   }          
 
         return { x: 1, y: 1 }
     }

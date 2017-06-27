@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { startGame } from './CrawlerActions';
+import { startGame, keyPress } from './CrawlerActions';
 
 import Header from '../header/Header';
 import StatusBar from '../statusBar/StatusBar';
 import GameDisplay from '../gameDisplay/GameDisplay';
 
 
+@keydown
 class Crawler extends Component {
 
     componentDidMount() {
         this.props.startGame();
+    }
+
+    componentWillReceiveProps( { keydown } ) {
+        if ( keydown.event ) {
+            // inspect the keydown event and decide what to do 
+            console.log( keydown.event.which );
+        }
     }
 
     render() {
@@ -26,7 +34,6 @@ class Crawler extends Component {
 }
 
 
-
 const mapStateToProps = (state) => {
     return {
         game: state.game,
@@ -36,6 +43,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         startGame: () => dispatch(startGame()),
+        keyPress: (key) => dispatch(keyPress(key))
     };
 };
 

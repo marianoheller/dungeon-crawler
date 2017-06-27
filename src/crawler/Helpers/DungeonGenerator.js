@@ -1,3 +1,11 @@
+/**
+ * Tiles:
+ *  0 - Corridor
+ *  1 - Wall
+ *  [2-*] - Different rooms
+ * @param {*} Object Dungeon configuration object 
+ */
+
 
 export default function NewDungeon({width = 50, height = 50, minRoomSize = 5, maxRoomSize = 20}) {
 
@@ -252,6 +260,7 @@ export default function NewDungeon({width = 50, height = 50, minRoomSize = 5, ma
   
   const dungeon = Object.create(Dungeon);
   dungeon.init(width, height, minRoomSize, maxRoomSize);
-  return dungeon.tree.level;
+  const retDungeon = dungeon.tree.level.map ( (r) => r.map(String));
+  return retDungeon;
 
 } // end NewDungeon
