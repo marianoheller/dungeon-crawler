@@ -15,6 +15,10 @@ export default class Engine {
         return rawDungeon;
     }
 
+    static computePlayerMove( dungeon, prevPos, move ) {
+        
+    }
+
     static generatePlayerPosition( dungeon ) {
         if ( !dungeon ) {   throw new Error(`Param erroneo al generar position. dungeon: ${dungeon}`)   }          
 

@@ -26,7 +26,38 @@ export const initialState = {
             expPerLvl: undefined,
         },
     },
-}
+};
+
+export const validKeys = [
+    {
+        key: "ArrowUp",
+        compute: {
+            x: 0,
+            y: -1,
+        },
+    },
+    {
+        key: "ArrowDown",
+        compute: {
+            x: 0,
+            y: 1,
+        },
+    },
+    {
+        key: "ArrowRight",
+        compute: {
+            x: 1,
+            y: 0,
+        },
+    },
+    {
+        key: "ArrowLeft",
+        compute: {
+            x: -1,
+            y: 0,
+        },
+    },
+]
 
 //==========================================================
 // Elements config

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import keydown from 'react-keydown';
 import { connect } from 'react-redux';
 import { startGame, keyPress } from './CrawlerActions';
+
+import { validKeys } from '../App.config';
 
 import Header from '../header/Header';
 import StatusBar from '../statusBar/StatusBar';
@@ -16,8 +19,10 @@ class Crawler extends Component {
 
     componentWillReceiveProps( { keydown } ) {
         if ( keydown.event ) {
-            // inspect the keydown event and decide what to do 
-            console.log( keydown.event.which );
+            const actualKeydown = validKeys.find( (keyObj) => keyObj.key === keydown.event.key )
+            if( actualKeydown ) {
+                this.props.keyPress(actualKeydown);
+            }
         }
     }
 
@@ -36,7 +41,6 @@ class Crawler extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        game: state.game,
     };
 };
 

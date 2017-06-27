@@ -15,7 +15,7 @@ export function finishGame() {
 
 export function keyPress(key) {
     return {
-        type: 'GAME_HAS_FINISHED',
+        type: 'KEY_PRESS',
         key: key,
     };
 }

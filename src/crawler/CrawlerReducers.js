@@ -18,7 +18,15 @@ export function gameState(state = null, action) {
                 dungeon: null,
                 gameHasStarted: false,
             };
-
+        case 'KEY_PRESS':
+            return {
+                ...state,
+                position: {
+                    ...state.position,
+                    x: state.position.x + action.key.compute.x,
+                    y: state.position.y + action.key.compute.y,
+                }
+            }
         default:
             return state;
     }
