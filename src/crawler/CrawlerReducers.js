@@ -19,12 +19,14 @@ export function gameState(state = null, action) {
                 gameHasStarted: false,
             };
         case 'KEY_PRESS':
+            const { dungeon, position } = state;
+            const newPosition = Engine.processKeyPress( dungeon, position, action.key )
             return {
                 ...state,
                 position: {
                     ...state.position,
-                    x: state.position.x + action.key.compute.x,
-                    y: state.position.y + action.key.compute.y,
+                    x: newPosition.x,
+                    y: newPosition.y,
                 }
             }
         default:

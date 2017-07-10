@@ -33,18 +33,18 @@ class GameDisplay extends Component {
         const renderedDungeon = (
             <div className="dungeon-container">
                 { dungeon.map( (r, ri) => {
-                return (
-                    <div className="row-container" key={`row-${ri}`}>
-                    { 
-                        r.map( (t, ti) => (
-                            <div 
-                            className={this.getTileClass(t)} 
-                            key={`tile-${ri}-${ti}`}
-                            >{ ri===y && ti===x ? "O" : ""}</div>
-                        ) ) 
-                    }
-                    </div>
-                )
+                    return (
+                        <div className="row-container" key={`row-${ri}`}>
+                        { 
+                            r.map( (t, ti) => (
+                                <div 
+                                className={this.getTileClass(t)} 
+                                key={`tile-${ri}-${ti}`}
+                                >{ ri===y && ti===x ? "O" : ""}</div>
+                            ) ) 
+                        }
+                        </div>
+                    )
                 }) }
             </div>
         );

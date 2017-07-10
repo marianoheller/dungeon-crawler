@@ -31,28 +31,28 @@ export const initialState = {
 export const validKeys = [
     {
         key: "ArrowUp",
-        compute: {
+        value: {
             x: 0,
             y: -1,
         },
     },
     {
         key: "ArrowDown",
-        compute: {
+        value: {
             x: 0,
             y: 1,
         },
     },
     {
         key: "ArrowRight",
-        compute: {
+        value: {
             x: 1,
             y: 0,
         },
     },
     {
         key: "ArrowLeft",
-        compute: {
+        value: {
             x: -1,
             y: 0,
         },

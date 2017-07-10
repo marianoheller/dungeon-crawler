@@ -15,8 +15,15 @@ export default class Engine {
         return rawDungeon;
     }
 
-    static computePlayerMove( dungeon, prevPos, move ) {
+    static processKeyPress( dungeon, prevPos, move ) {
+        const { x: prevX , y: prevY } = prevPos;
+        const { x: valX, y: valY } = move.value;
         
+        const newPos = { x: prevX + valX , y: prevY + valY };
+        if ( dungeon[newPos.y][newPos.x] === "1" ) {
+            return prevPos;
+        }
+        return newPos;
     }
 
     static generatePlayerPosition( dungeon ) {
