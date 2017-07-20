@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import keydown from 'react-keydown';
 import { connect } from 'react-redux';
+import debounce from 'debounce';
 import { startGame, keyPress } from './CrawlerActions';
 
 import { validKeys } from '../App.config';
@@ -15,13 +16,18 @@ class Crawler extends Component {
 
     componentDidMount() {
         this.props.startGame();
+        this.triggerKey = debounce(this.triggerKey, 10, true);
+    }
+
+    triggerKey( key ) {
+        this.props.keyPress(key);
     }
 
     componentWillReceiveProps( { keydown } ) {
         if ( keydown.event ) {
             const actualKeydown = validKeys.find( (keyObj) => keyObj.key === keydown.event.key )
             if( actualKeydown ) {
-                this.props.keyPress(actualKeydown);
+                this.triggerKey(actualKeydown);
             }
         }
     }
