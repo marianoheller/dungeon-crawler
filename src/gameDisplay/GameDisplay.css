@@ -27,3 +27,19 @@
 .tile-floor {
     background-color: #999;
 }
+
+.tile-enemy {
+    background-color: #D00
+}
+
+.tile-item {
+    background-color: #00D;
+}
+
+.tile-player {
+    background-color: #0D0;
+}
+
+.tile-fog {
+    background-color: #000;
+}

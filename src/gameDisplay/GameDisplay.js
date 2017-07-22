@@ -7,40 +7,45 @@ import './GameDisplay.css';
 
 class GameDisplay extends Component {
 
+    aplanarDungeon( ) {
+        const { dungeon } = this.props.game;
+        if ( !dungeon ) {   return undefined;    }
+        const { x, y } = dungeon.playerPosition; 
+
+        return dungeon.raw.map( (row, rowIndex) => row.map( (tile, tileIndex) => {
+            if ( dungeon.fogged[rowIndex][tileIndex] ) {   return dungeon.fogged[rowIndex][tileIndex];   }
+            if ( tile === "1" ) {  return tile;  }
+            if ( rowIndex===y && tileIndex===x ) {  return elementsConfig.player.symbol;  }
+            if ( dungeon.items[rowIndex][tileIndex] ) {   return dungeon.items[rowIndex][tileIndex];   }
+            if ( dungeon.enemies[rowIndex][tileIndex] ) {   return dungeon.enemies[rowIndex][tileIndex];   }
+            return "0";
+        } ));
+    }
+
     getTileClass( t, x, y) {
         let ret = " tile-container ";
-
-        const element = elementsConfig.find( (e) => e.symbol===t )
-        if ( element ) {
-            ret += element.class;
-        }
-        else {
-            ret += " tile-floor "
-        } 
-        // else {
-        //     throw new Error(`Error de tipo de tile. Tile: ${t}`);
-        // }
-        return  ret;
+        const elementKey = Object.keys(elementsConfig).find ( (key) => elementsConfig[key].symbol === t );
+        if ( !elementKey ) {   return ret;   }
+        return ret + elementsConfig[elementKey].class;
     }
 
     render() {
-        const { dungeon, position } = this.props.game;
-        const { x, y } = position; 
-        if ( !dungeon ) {   return <div>Loading...</div>    }
         
+        const plainDungeon = this.aplanarDungeon();
+        if ( !plainDungeon ) {   return <div>Loading...</div>    }
 
     
         const renderedDungeon = (
             <div className="dungeon-container">
-                { dungeon.map( (r, ri) => {
+                { plainDungeon.map( (row, rowIndex) => {
                     return (
-                        <div className="row-container" key={`row-${ri}`}>
+                        <div className="row-container" key={`row-${rowIndex}`}>
                         { 
-                            r.map( (t, ti) => (
+                            row.map( (tile, tileIndex) => (
                                 <div 
-                                className={this.getTileClass(t)} 
-                                key={`tile-${ri}-${ti}`}
-                                >{ ri===y && ti===x ? "O" : ""}</div>
+                                className={this.getTileClass(tile)} 
+                                key={`tile-${rowIndex}-${tileIndex}`}
+                                >{tile}</div>
                             ) ) 
                         }
                         </div>

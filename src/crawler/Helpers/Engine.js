@@ -1,6 +1,6 @@
-import NewDungeon from './DungeonGenerator';
-import GenerateElements from './ElementsGenerator';
-import { initialState, baseExpPerLvl, baseHealthMin } from '../../App.config';
+import newDungeon from './DungeonGenerator';
+import { generateItems, generateEnemies, generateFogged } from './ElementsGenerator';
+import { initialState, baseExpPerLvl, baseHealthMin, elementsConfig } from '../../App.config';
 
 export default class Engine {
 
@@ -11,19 +11,35 @@ export default class Engine {
             minRoomSize,
             maxRoomSize,
         };
-        const rawDungeon = GenerateElements( NewDungeon(options) );
-        return rawDungeon;
+        const dungeon = {};
+        dungeon["raw"] = newDungeon(options);
+        dungeon["items"] =  generateItems( dungeon );
+        dungeon["enemies"] = generateEnemies( dungeon );
+        dungeon["playerPosition"] = this.generatePlayerPosition( dungeon );
+        dungeon["fogged"] = generateFogged(dungeon, true);
+        return dungeon;
     }
 
-    static processKeyPress( dungeon, prevPos, move ) {
-        const { x: prevX , y: prevY } = prevPos;
+    static processKeyPress( dungeon, move ) {
+        const { x: prevX , y: prevY } = dungeon.playerPosition;
         const { x: valX, y: valY } = move.value;
         
         const newPos = { x: prevX + valX , y: prevY + valY };
-        if ( dungeon[newPos.y][newPos.x] === "1" ) {
-            return prevPos;
+        if ( dungeon.raw[newPos.y][newPos.x] === elementsConfig.wall.symbol ) {
+            return dungeon;
         }
-        return newPos;
+        if ( dungeon.enemies[newPos.y][newPos.x] === elementsConfig.enemy.symbol) {
+            return dungeon;
+        }
+        const newFogged = generateFogged( {
+            ...dungeon,
+            playerPosition: newPos,
+        });
+        return {
+            ...dungeon,
+            fogged: newFogged,
+            playerPosition: newPos,
+        };
     }
 
     static generatePlayerPosition( dungeon ) {

@@ -7,7 +7,7 @@
  */
 
 
-export default function NewDungeon({width = 50, height = 50, minRoomSize = 5, maxRoomSize = 20}) {
+export default function newDungeon({width = 50, height = 50, minRoomSize = 5, maxRoomSize = 20}) {
 
   const VERTICAL = 'vertical';
   const HORIZONTAL = 'horizontal';

@@ -10,7 +10,6 @@ export function gameState(state = null, action) {
                 dungeon: newDungeon,
                 contDungeon: 0,
                 gameHasStarted: true,
-                position: Engine.generatePlayerPosition( newDungeon ),
             };
         case 'GAME_HAS_FINISHED':
             return {
@@ -19,15 +18,12 @@ export function gameState(state = null, action) {
                 gameHasStarted: false,
             };
         case 'KEY_PRESS':
-            const { dungeon, position } = state;
-            const newPosition = Engine.processKeyPress( dungeon, position, action.key )
+            const { dungeon } = state;
+            const afterKeyDungeon = Engine.processKeyPress( dungeon, action.key )
+            console.log(afterKeyDungeon);
             return {
                 ...state,
-                position: {
-                    ...state.position,
-                    x: newPosition.x,
-                    y: newPosition.y,
-                }
+                dungeon: afterKeyDungeon,
             }
         default:
             return state;

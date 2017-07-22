@@ -24,6 +24,10 @@ class StatusBar extends Component {
                 <div className="status-item status-exp">
                     Exp: {this.props.stats.exp}
                 </div>
+                <div className="status-item status-exp-tnl">
+                    TNL: {this.props.stats.expPerLvl - this.props.stats.exp}
+                </div>
+
                 
             </div>
         )

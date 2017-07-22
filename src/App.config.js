@@ -69,27 +69,32 @@ export const dungeonConfig = {
     maxRoomSize: 10,
 }
 
-export const elementsConfig = [
-    {
-        type: "floor",
+export const elementsConfig = {
+    floor: {
         class: " tile-floor ",
         symbol: "0",
     },
-    {
-        type: "wall",
+    wall: {
         class: " tile-wall ",
         symbol: "1",
     },
-    {
-        type: "item",
+    player: {
+        class: " tile-player ",
+        symbol: "P",
+    },
+    item: {
         class: " tile-item ",
         symbol: "?",
-        cant: dungeonConfig.width * dungeonConfig.height * 0.01,
+        prob: 0.0075,
     },
-    {
-        type: "enemy",
+    enemy: {
         class: " tile-enemy ",
         symbol: "+",
-        cant: dungeonConfig.width * dungeonConfig.height * 0.01,
-    }
-]
+        prob: 0.0075,
+    },
+    fog: {
+        class: " tile-fog ",
+        radius: 5,
+        symbol: "F",
+    },
+}
