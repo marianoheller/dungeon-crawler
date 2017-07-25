@@ -1,5 +1,5 @@
 import newDungeon from './DungeonGenerator';
-import { generateItems, generateEnemies, generateFogged } from './ElementsGenerator';
+import G from './ElementsGenerator';
 import { initialState, baseExpPerLvl, baseHealthMin, elementsConfig } from '../../App.config';
 
 export default class Engine {
@@ -12,11 +12,13 @@ export default class Engine {
             maxRoomSize,
         };
         const dungeon = {};
+        dungeon["options"] = options;
         dungeon["raw"] = newDungeon(options);
-        dungeon["items"] =  generateItems( dungeon );
-        dungeon["enemies"] = generateEnemies( dungeon );
-        dungeon["playerPosition"] = this.generatePlayerPosition( dungeon );
-        dungeon["fogged"] = generateFogged(dungeon, true);
+        dungeon["items"] =  G.generateItems( dungeon );
+        dungeon["enemies"] = G.generateEnemies( dungeon );
+        dungeon["playerPosition"] = G.generateStartingPoint( dungeon );
+        dungeon["stairsPosition"] = G.generateStairs( dungeon );
+        dungeon["fogged"] = G.generateFogged(dungeon, true);
         return dungeon;
     }
 
@@ -31,7 +33,7 @@ export default class Engine {
         if ( dungeon.enemies[newPos.y][newPos.x] === elementsConfig.enemy.symbol) {
             return dungeon;
         }
-        const newFogged = generateFogged( {
+        const newFogged = G.generateFogged( {
             ...dungeon,
             playerPosition: newPos,
         });
@@ -40,12 +42,6 @@ export default class Engine {
             fogged: newFogged,
             playerPosition: newPos,
         };
-    }
-
-    static generatePlayerPosition( dungeon ) {
-        if ( !dungeon ) {   throw new Error(`Param erroneo al generar position. dungeon: ${dungeon}`)   }          
-
-        return { x: 1, y: 1 }
     }
 
     static generatePlayerStats() {

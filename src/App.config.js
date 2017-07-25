@@ -97,4 +97,8 @@ export const elementsConfig = {
         radius: 5,
         symbol: "F",
     },
+    stairs: {
+        class: " tile-stairs ",
+        symbol: "S",
+    }
 }

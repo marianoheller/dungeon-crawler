@@ -12,34 +12,34 @@
 .tile-container {
     width: 15px;
     height: 15px;
-    margin: 0;
+    margin: 0px;
     display: inline-block;
 }
 
 .tile-wall {
-    background-color: #333;
-}
-
-.tile-corridor {
-    background-color: #777;
+    background-color: white;
 }
 
 .tile-floor {
-    background-color: #999;
+    background-color: black;
 }
 
 .tile-enemy {
-    background-color: #D00
+    background-color: lightcoral
 }
 
 .tile-item {
-    background-color: #00D;
+    background-color: lightseagreen;
 }
 
 .tile-player {
-    background-color: #0D0;
+    background-color: lightgray;
 }
 
 .tile-fog {
-    background-color: #000;
+    background-color: white;
+}
+
+.tile-stairs {
+    background-color: purple;
 }

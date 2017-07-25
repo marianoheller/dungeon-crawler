@@ -10,12 +10,14 @@ class GameDisplay extends Component {
     aplanarDungeon( ) {
         const { dungeon } = this.props.game;
         if ( !dungeon ) {   return undefined;    }
-        const { x, y } = dungeon.playerPosition; 
+        const { x, y } = dungeon.playerPosition;
+        const { x: sX, y: sY} = dungeon.stairsPosition;
 
         return dungeon.raw.map( (row, rowIndex) => row.map( (tile, tileIndex) => {
             if ( dungeon.fogged[rowIndex][tileIndex] ) {   return dungeon.fogged[rowIndex][tileIndex];   }
             if ( tile === "1" ) {  return tile;  }
             if ( rowIndex===y && tileIndex===x ) {  return elementsConfig.player.symbol;  }
+            if ( rowIndex===sY && tileIndex===sX ) {  return elementsConfig.stairs.symbol;  }
             if ( dungeon.items[rowIndex][tileIndex] ) {   return dungeon.items[rowIndex][tileIndex];   }
             if ( dungeon.enemies[rowIndex][tileIndex] ) {   return dungeon.enemies[rowIndex][tileIndex];   }
             return "0";
@@ -45,7 +47,7 @@ class GameDisplay extends Component {
                                 <div 
                                 className={this.getTileClass(tile)} 
                                 key={`tile-${rowIndex}-${tileIndex}`}
-                                >{tile}</div>
+                                ></div>
                             ) ) 
                         }
                         </div>

@@ -1,4 +1,10 @@
+
+
 .status-item {
     display: inline-block;
     margin-left: 10px;
+}
+
+.status-bar {
+    font-family: 'munroregular', sans-serif;
 }
