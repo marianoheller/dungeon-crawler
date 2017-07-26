@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import debounce from 'debounce';
 import { startGame, keyPress } from './CrawlerActions';
 
-import { validKeys } from '../App.config';
+import Engine from './Helpers/Engine';
+import { validKeys, dungeonConfig } from '../App.config';
 
 import Header from '../header/Header';
 import StatusBar from '../statusBar/StatusBar';
@@ -15,12 +16,15 @@ import GameDisplay from '../gameDisplay/GameDisplay';
 class Crawler extends Component {
 
     componentDidMount() {
-        this.props.startGame();
+        const dungeon = Engine.generateDungeon( dungeonConfig );
+        const playerStats = Engine.generatePlayerStats();
+        this.props.startGame(dungeon, playerStats);
         this.triggerKey = debounce(this.triggerKey, 10, true);
     }
 
     triggerKey( key ) {
-        this.props.keyPress(key);
+        const afterKeyDungeon = Engine.processKeyPress( dungeon, key )
+        this.props.keyPress(afterKeyDungeon);
     }
 
     componentWillReceiveProps( { keydown } ) {
@@ -52,8 +56,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        startGame: () => dispatch(startGame()),
-        keyPress: (key) => dispatch(keyPress(key))
+        startGame: (dungeon, playerStats) => dispatch(startGame(dungeon, playerStats)),
+        keyPress: (afterKeyDungeon) => dispatch(keyPress(afterKeyDungeon))
     };
 };
 

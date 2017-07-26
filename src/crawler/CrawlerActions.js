@@ -1,8 +1,10 @@
 
-export function startGame() {
+export function startGame(dungeon, playerStats) {
     return {
         type: 'GAME_HAS_STARTED',
         gameHasStarted: true,
+        dungeon: dungeon,
+        playerStats: playerStats
     };
 }
 
@@ -13,9 +15,9 @@ export function finishGame() {
     };
 }
 
-export function keyPress(key) {
+export function keyPress(afterKeyDungeon) {
     return {
         type: 'KEY_PRESS',
-        key: key,
+        afterKeyDungeon,
     };
 }
