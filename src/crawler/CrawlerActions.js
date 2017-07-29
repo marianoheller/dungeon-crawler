@@ -15,9 +15,9 @@ export function finishGame() {
     };
 }
 
-export function keyPress(afterKeyDungeon) {
+export function keyPress(key) {
     return {
         type: 'KEY_PRESS',
-        afterKeyDungeon,
+        key,
     };
 }

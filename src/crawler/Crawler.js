@@ -23,8 +23,7 @@ class Crawler extends Component {
     }
 
     triggerKey( key ) {
-        const afterKeyDungeon = Engine.processKeyPress( dungeon, key )
-        this.props.keyPress(afterKeyDungeon);
+        this.props.keyPress(key);
     }
 
     componentWillReceiveProps( { keydown } ) {
@@ -57,7 +56,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         startGame: (dungeon, playerStats) => dispatch(startGame(dungeon, playerStats)),
-        keyPress: (afterKeyDungeon) => dispatch(keyPress(afterKeyDungeon))
+        keyPress: (key) => dispatch(keyPress(key))
     };
 };
 

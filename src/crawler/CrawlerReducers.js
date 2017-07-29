@@ -16,13 +16,12 @@ export function gameState(state = null, action) {
                 gameHasStarted: action.gameHasStarted,
             };
         case 'KEY_PRESS':
-            /* const { dungeon } = state;
-            const afterKeyDungeon = Engine.processKeyPress( dungeon, action.key )
-            console.log(afterKeyDungeon); */
+            const { dungeon } = state;
+            const afterKeyDungeon = Engine.processKeyPress( dungeon, action.key );
             return {
                 ...state,
-                dungeon: action.afterKeyDungeon,
-            }
+                dungeon: afterKeyDungeon,
+            };
         default:
             return state;
     }
