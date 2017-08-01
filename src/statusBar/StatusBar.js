@@ -37,7 +37,7 @@ class StatusBar extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        stats: state.player.stats,
+        stats: state.game.player.stats,
     };
 };
 

@@ -22,33 +22,11 @@ export default class Engine {
         return dungeon;
     }
 
-    static processKeyPress( dungeon, move ) {
-        const { x: prevX , y: prevY } = dungeon.playerPosition;
-        const { x: valX, y: valY } = move.value;
-        
-        const newPos = { x: prevX + valX , y: prevY + valY };
-        if ( dungeon.raw[newPos.y][newPos.x] === elementsConfig.wall.symbol ) {
-            return dungeon;
-        }
-        if ( dungeon.enemies[newPos.y][newPos.x] === elementsConfig.enemy.symbol) {
-            return dungeon;
-        }
-        const newFogged = G.generateFogged( {
-            ...dungeon,
-            playerPosition: newPos,
-        });
-        return {
-            ...dungeon,
-            fogged: newFogged,
-            playerPosition: newPos,
-        };
-    }
-
     static generatePlayerStats() {
         const stats = {};
 
         //Generate stats
-        Object.keys(initialState.player.stats).forEach( (key) => {
+        Object.keys(initialState.game.player.stats).forEach( (key) => {
             switch (key) {
                 case "name":
                     stats[key] = "aaaaa";
@@ -78,4 +56,59 @@ export default class Engine {
 
         return stats;
     }
+
+    
+    static processItem(state, newPos) {
+
+        const newItemsMap = state.dungeon.items.slice()
+        newItemsMap[newPos.y][newPos.x] = "";
+        return {
+                ...state,
+                dungeon: {
+                    ...state.dungeon,
+                    playerPosition: newPos,
+                    items: newItemsMap,
+                },
+                player: {
+                    ...state.player,
+                    stats: {
+                        ...state.player.stats,
+                        attack: state.player.stats.attack + 1,
+                    }
+                }
+            };
+    }
+
+    static processKeyPress( state, move ) {
+        const { dungeon, player } = state;
+        const { x: prevX , y: prevY } = dungeon.playerPosition;
+        const { x: valX, y: valY } = move.value;
+        
+        const newPos = { x: prevX + valX , y: prevY + valY };
+        if ( dungeon.raw[newPos.y][newPos.x] === elementsConfig.wall.symbol ) {
+            return state;
+        }
+        if ( dungeon.enemies[newPos.y][newPos.x] === elementsConfig.enemy.symbol) {
+            return state;
+        }
+        if ( dungeon.items[newPos.y][newPos.x] === elementsConfig.item.symbol) {
+            const newState = this.processItem(state, newPos)
+            return newState;
+        }
+        const newFogged = G.generateFogged( {
+            ...dungeon,
+            playerPosition: newPos,
+        });
+        return {
+            ...state,
+            dungeon: {
+                ...dungeon,
+                fogged: newFogged,
+                playerPosition: newPos,
+            },
+        };
+    }
+
+
 }
+

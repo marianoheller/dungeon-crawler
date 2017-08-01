@@ -14,18 +14,19 @@ export const initialState = {
             x: undefined,
             y: undefined,
         },
-    },
-    player: {
-        stats: {
-            name: undefined,
-            health: undefined,
-            weapon: undefined,
-            attack: undefined,
-            level: undefined,
-            exp: undefined,
-            expPerLvl: undefined,
+        player: {
+            stats: {
+                name: undefined,
+                health: undefined,
+                weapon: undefined,
+                attack: undefined,
+                level: undefined,
+                exp: undefined,
+                expPerLvl: undefined,
+            },
         },
     },
+   
 };
 
 export const validKeys = [
