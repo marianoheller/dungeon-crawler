@@ -11,13 +11,13 @@ class GameDisplay extends Component {
         const { dungeon } = this.props.game;
         if ( !dungeon ) {   return undefined;    }
         const { x, y } = dungeon.playerPosition;
-        const { x: sX, y: sY} = dungeon.stairsPosition;
+        const { x: bX, y: bY} = dungeon.bossPosition;
 
         return dungeon.raw.map( (row, rowIndex) => row.map( (tile, tileIndex) => {
             if ( dungeon.fogged[rowIndex][tileIndex] ) {   return dungeon.fogged[rowIndex][tileIndex];   }
             if ( tile === "1" ) {  return tile;  }
             if ( rowIndex===y && tileIndex===x ) {  return elementsConfig.player.symbol;  }
-            if ( rowIndex===sY && tileIndex===sX ) {  return elementsConfig.stairs.symbol;  }
+            if ( rowIndex===bY && tileIndex===bX ) {  return elementsConfig.boss.symbol;  }
             if ( dungeon.items[rowIndex][tileIndex] ) {   return dungeon.items[rowIndex][tileIndex];   }
             if ( dungeon.enemies[rowIndex][tileIndex] ) {   return dungeon.enemies[rowIndex][tileIndex];   }
             return "0";

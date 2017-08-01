@@ -2,7 +2,7 @@
 //=========================================================
 //App config
 
-export const baseExpPerLvl = 100;
+export const baseExpPerLvl = 5;
 export const baseHealthMin = 20;
 
 export const initialState = {
@@ -16,7 +16,6 @@ export const initialState = {
         },
         player: {
             stats: {
-                name: undefined,
                 health: undefined,
                 weapon: undefined,
                 attack: undefined,
@@ -98,8 +97,8 @@ export const elementsConfig = {
         radius: 5,
         symbol: "F",
     },
-    stairs: {
-        class: " tile-stairs ",
+    boss: {
+        class: " tile-boss ",
         symbol: "S",
     }
 }

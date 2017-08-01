@@ -62,7 +62,7 @@ export default class ElementsGenerator {
     }
 
 
-    static generateStairs( dungeon ) {
+    static generateBoss( dungeon ) {
         if ( !dungeon ) {   throw new Error(`Param erroneo al generar position. dungeon: ${dungeon}`)   }
         
         const { width } = dungeon.options;

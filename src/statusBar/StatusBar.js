@@ -12,9 +12,9 @@ class StatusBar extends Component {
                 <div className="status-item status-health">
                     Health: {this.props.stats.health}
                 </div>
-                <div className="status-item status-weapon">
+                {/* <div className="status-item status-weapon">
                     Weapon: {this.props.stats.weapon}
-                </div>
+                </div> */}  
                 <div className="status-item status-level">
                     Level: {this.props.stats.level}
                 </div>

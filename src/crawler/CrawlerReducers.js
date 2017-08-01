@@ -6,7 +6,6 @@ export function gameState(state = null, action) {
             return {
                 ...state,
                 dungeon: action.dungeon,
-                contDungeon: 0,
                 gameHasStarted: action.gameHasStarted,
                 player: {
                     ...state.player,
@@ -20,7 +19,7 @@ export function gameState(state = null, action) {
                 gameHasStarted: action.gameHasStarted,
             };
         case 'KEY_PRESS':
-            const afterKeyState = Engine.processKeyPress( state, action.key );
+            const afterKeyState = Engine.processKeyPress( {...state}, action.key );
             return {
                 ...afterKeyState
             };
