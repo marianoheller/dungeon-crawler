@@ -20,9 +20,7 @@ export function gameState(state = null, action) {
             };
         case 'KEY_PRESS':
             const afterKeyState = Engine.processKeyPress( {...state}, action.key );
-            return {
-                ...afterKeyState
-            };
+            return afterKeyState;
         default:
             return state;
     }

@@ -87,7 +87,7 @@ export default class Engine {
 
         return state;
 
-        return {
+        const ret =  {
                 ...state,
                 dungeon: {
                     ...state.dungeon,
@@ -102,6 +102,10 @@ export default class Engine {
                     }
                 }
             };
+        if (state === ret) {
+            throw new Error("Estados iguales en processEnemy!!");
+        }    
+        return ret;
     }
 
     static processKeyPress( state, move ) {
