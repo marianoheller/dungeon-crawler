@@ -81,9 +81,14 @@ export default class Engine {
     }
 
     static processEnemy( state, newPos) {
-        const newEnemies = [ ...state.dungeon.enemies ];
+        //const newEnemies = [ ...state.dungeon.enemies ];
+        const newEnemies = state.dungeon.enemies.slice(0);
         newEnemies[newPos.y][newPos.x] = "";
         const newHealth = state.player.stats.health - Math.floor(Math.random()*10);
+
+        if (state.dungeon.enemies === newEnemies) {
+            throw new Error("Estados iguales en processEnemy!!");
+        }
 
         return state;
 
@@ -104,7 +109,7 @@ export default class Engine {
             };
         if (state === ret) {
             throw new Error("Estados iguales en processEnemy!!");
-        }    
+        }
         return ret;
     }
 
